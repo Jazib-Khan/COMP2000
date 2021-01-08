@@ -41,6 +41,7 @@ public class Seller extends JFrame {
         sellersTable.getTableHeader().setReorderingAllowed(false);
 
 
+
         addBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -69,5 +70,24 @@ public class Seller extends JFrame {
                 }
             }
         });
+        clearBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                SellID.setText("");
+                SellName.setText("");
+                SellPass.setText("");
+            }
+        });
+    }
+
+    public void SelectSeller(){
+        try{
+            //connect to text file
+            sellersTable.setModel(null);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 }
