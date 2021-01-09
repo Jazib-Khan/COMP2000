@@ -60,7 +60,7 @@ public class Seller extends JFrame {
                         File file = new File("C:\\Users\\User\\Documents\\GitHub\\COMP2000\\SellerTbl.txt");
                         Scanner scan = new Scanner(file);
 
-                        JOptionPane.showMessageDialog(null, "Added successfully");
+                        JOptionPane.showMessageDialog(null, "Seller added successfully");
                     } catch (Exception event) {
                         event.printStackTrace();
                     }
