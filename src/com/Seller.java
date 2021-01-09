@@ -47,9 +47,6 @@ public class Seller extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-
-
-
                 if (SellID.getText().isEmpty() || SellName.getText().isEmpty() || SellPass.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null,"Missing information");
@@ -70,6 +67,7 @@ public class Seller extends JFrame {
                 }
             }
         });
+
         clearBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -77,6 +75,21 @@ public class Seller extends JFrame {
                 SellID.setText("");
                 SellName.setText("");
                 SellPass.setText("");
+            }
+        });
+
+        sellersTable.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                //Displays the selected row onto the text fields
+                DefaultTableModel model = (DefaultTableModel)sellersTable.getModel();
+                int myIndex = sellersTable.getSelectedRow();
+                SellID.setText(model.getValueAt(myIndex, 0).toString());
+                SellName.setText(model.getValueAt(myIndex, 1).toString());
+                SellPass.setText(model.getValueAt(myIndex, 2).toString());
+
             }
         });
     }
