@@ -92,6 +92,48 @@ public class Seller extends JFrame {
 
             }
         });
+        delBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                if(SellID.getText().isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null, "Enter the Seller to be deleted");
+                }
+                else {
+                    try{
+                        //connect to text file
+                        //get SellID.gettext();
+                        //Delete from text file
+                        //JOptionPane "Seller Deleted Successfully"
+
+                    }catch (Exception event){
+                        event.printStackTrace();
+                    }
+
+                }
+            }
+        });
+        editBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (SellID.getText().isEmpty() || SellName.getText().isEmpty() || SellPass.getText().isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null,"Missing information");
+                }
+                else{
+                    try{
+                        //connect to text file
+                        //update query
+                        //JOptionPane "Seller information updated"
+                    }catch (Exception event){
+                        event.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 
     public void SelectSeller(){
