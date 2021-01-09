@@ -63,6 +63,16 @@ public class Products extends JFrame {
                 }
             }
         });
+        clearBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                prodID.setText("");
+                prodName.setText("");
+                prodQty.setText("");
+                prodPrice.setText("");
+            }
+        });
     }
 
 }
