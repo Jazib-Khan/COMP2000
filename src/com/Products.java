@@ -21,6 +21,9 @@ public class Products extends JFrame {
     private JTextField prodName;
     private JTextField prodQty;
     private JTextField prodPrice;
+    private JLabel sellerLbl;
+    private JLabel categoriesLbl;
+    private JLabel logoutLbl;
 
     public static void main(String[] args) {
         Products page = new Products();
@@ -88,6 +91,29 @@ public class Products extends JFrame {
                 prodPrice.setText(model.getValueAt(myIndex, 3).toString());
             }
         });
+
+
+        sellerLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new Seller().setVisible(true);
+            }
+        });
+
+        categoriesLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new Categories().setVisible(true);
+            }
+        });
+
+        logoutLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
+
     }
 
 }

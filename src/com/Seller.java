@@ -20,6 +20,9 @@ public class Seller extends JFrame {
     private JTextField SellName;
     private JPanel mainPanel;
     private JTable sellersTable;
+    private JLabel productLbl;
+    private JLabel categoriesLbl;
+    private JLabel logoutLbl;
 
     public static void main(String[] args) {
         Seller page = new Seller();
@@ -39,7 +42,6 @@ public class Seller extends JFrame {
         model.setColumnIdentifiers(columnIdentifiers);
         sellersTable.setModel(model);
         sellersTable.getTableHeader().setReorderingAllowed(false);
-
 
 
         addBtn.addMouseListener(new MouseAdapter() {
@@ -134,6 +136,29 @@ public class Seller extends JFrame {
                 }
             }
         });
+
+        productLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new Seller().setVisible(true);
+            }
+        });
+
+        categoriesLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new Categories().setVisible(true);
+            }
+        });
+
+        logoutLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                System.exit(0);
+            }
+        });
+
+
     }
 
     public void SelectSeller(){
