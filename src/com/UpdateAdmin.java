@@ -31,5 +31,22 @@ public class UpdateAdmin extends JFrame {
                 adminPass.setText("");
             }
         });
+        updateButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (adminName.getText().isEmpty() || adminPass.getText().isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null,"Missing information");
+                }
+                else {
+                    try {
+
+                    }catch (Exception event) {
+                        event.printStackTrace();
+                    }
+                }
+            }
+        });
     }
 }
