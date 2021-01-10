@@ -3,6 +3,8 @@ package com;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Bill extends JFrame{
     private JTable billTbl;
@@ -34,5 +36,16 @@ public class Bill extends JFrame{
         model.setColumnIdentifiers(columnIdentifiers);
         billTbl.setModel(model);
         billTbl.getTableHeader().setReorderingAllowed(false);
+
+        clearButton.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                billID.setText("");
+                billName.setText("");
+                billQuantity.setText("");
+                billPrice.setText("");
+            }
+        });
     }
 }
