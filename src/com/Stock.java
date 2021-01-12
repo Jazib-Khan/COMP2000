@@ -6,8 +6,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.util.Scanner;
-import java.util.logging.Logger;
 
 public class Stock extends JFrame {
     private JPanel mainPanel;
@@ -121,8 +119,6 @@ public class Stock extends JFrame {
 
                 try {
                     BufferedReader br = new BufferedReader(new FileReader(file));
-                    String firstLine = br.readLine().trim();
-                    /*String[] columnsName = firstLine.split(",");*/
                     DefaultTableModel model = (DefaultTableModel) stockTbl.getModel();
 
                     Object[] tableLines = br.lines().toArray();
@@ -135,8 +131,6 @@ public class Stock extends JFrame {
                 } catch (Exception event) {
                     event.printStackTrace();
                 }
-
-
             }
         });
     }

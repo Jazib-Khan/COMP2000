@@ -5,7 +5,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileReader;
 import java.util.Scanner;
 
 public class Bill extends JFrame{
@@ -15,7 +17,7 @@ public class Bill extends JFrame{
     private JTextField billQuantity;
     private JTextField billPrice;
     private JButton editButton;
-    private JButton refreshButton;
+    private JButton refBtn;
     private JButton addButton;
     private JComboBox categoryCB;
     private JButton clearButton;
@@ -103,5 +105,28 @@ public class Bill extends JFrame{
             }
         });
 
+        refBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                String filepath = "resources\\stockTbl.txt";
+                File file = new File(filepath);
+
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(file));
+                    DefaultTableModel model = (DefaultTableModel) billTbl.getModel();
+
+                    Object[] tableLines = br.lines().toArray();
+
+                    for (int i =0; i <tableLines.length; i++){
+                        String line = tableLines[i].toString().trim();
+                        String[] dataRow = line.split(",");
+                        model.addRow(dataRow);
+                    }
+                } catch (Exception event) {
+                    event.printStackTrace();
+                }
+            }
+        });
     }
 }
