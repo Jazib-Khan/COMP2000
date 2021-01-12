@@ -21,6 +21,7 @@ public class Bill extends JFrame{
     private JButton clearButton;
     private JPanel mainPanel;
     private JTextArea billTxt;
+    private JLabel logoutLbl;
 
     public static void main(String[] args) {
         Bill page = new Bill();
@@ -70,7 +71,7 @@ public class Bill extends JFrame{
 
                         //Insert the values into the text file
                         model.addRow(new Object[]{billID.getText(), billName.getText(), billQuantity.getText(), billPrice.getText(), categoryCB.getSelectedItem().toString()});
-                        File file = new File("C:\\Users\\User\\Documents\\GitHub\\COMP2000\\SellerTbl.txt");
+                        File file = new File("C:\\Users\\User\\Documents\\GitHub\\COMP2000\\stockTbl.txt");
                         Scanner scan = new Scanner(file);
 
                     } catch (Exception event) {
@@ -92,5 +93,15 @@ public class Bill extends JFrame{
 
             }
         });
+
+        logoutLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new Login().setVisible(true);
+
+
+            }
+        });
+
     }
 }

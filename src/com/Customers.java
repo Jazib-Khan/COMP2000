@@ -5,30 +5,33 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.util.Scanner;
 
-public class Seller extends JFrame {
-    private JTextField SellID;
-    private JTextField SellPass;
+
+
+public class Customers extends JFrame {
+    private JPanel mainPanel;
+    private JTextField customerID;
+    private JTextField customerPassword;
+    private JTextField customerName;
+    private JButton deleteBtn;
+    private JButton clearBtn;
     private JButton editBtn;
     private JButton addBtn;
-    private JButton clearBtn;
-    private JButton delBtn;
-    private JTextField SellName;
-    private JPanel mainPanel;
-    private JTable sellersTable;
-    private JLabel productLbl;
+    private JTable customerTbl;
     private JLabel categoriesLbl;
+    private JLabel productLbl;
     private JLabel logoutLbl;
 
     public static void main(String[] args) {
-        Seller page = new Seller();
+        Customers page = new Customers();
         page.setVisible(true);
     }
 
-    public Seller() {
+    public Customers(){
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(800,600));
@@ -37,16 +40,14 @@ public class Seller extends JFrame {
         String[] columnIdentifiers = new String[]{"ID", "Name", "Password"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columnIdentifiers);
-        sellersTable.setModel(model);
-        sellersTable.getTableHeader().setReorderingAllowed(false);
-
-
+        customerTbl.setModel(model);
+        customerTbl.getTableHeader().setReorderingAllowed(false);
         addBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                if (SellID.getText().isEmpty() || SellName.getText().isEmpty() || SellPass.getText().isEmpty())
+                if (customerID.getText().isEmpty() || customerName.getText().isEmpty() || customerPassword.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null,"Missing information");
                 }
@@ -55,11 +56,13 @@ public class Seller extends JFrame {
                     try {
 
                         //Insert the values into the text file
-                        model.addRow(new Object[]{SellID.getText(), SellName.getText(), SellPass.getText()});
-                        File file = new File("C:\\Users\\User\\Documents\\GitHub\\COMP2000\\SellerTbl.txt");
-                        Scanner scan = new Scanner(file);
+                        model.addRow(new Object[]{customerID.getText(), customerName.getText(), customerPassword.getText()});
 
-                        JOptionPane.showMessageDialog(null, "Seller added successfully");
+                        BufferedWriter bw = new BufferedWriter(new FileWriter("C:\\Users\\User\\Documents\\GitHub\\COMP2000\\customerTbl.txt"));
+                        bw.write(customerID.getText() + ", " + customerName.getText() + ", " + customerPassword.getText());
+                        bw.close();
+
+                        JOptionPane.showMessageDialog(null, "Customer added successfully");
                     } catch (Exception event) {
                         event.printStackTrace();
                     }
@@ -71,32 +74,32 @@ public class Seller extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                SellID.setText("");
-                SellName.setText("");
-                SellPass.setText("");
+                customerID.setText("");
+                customerName.setText("");
+                customerPassword.setText("");
             }
         });
 
-        sellersTable.addMouseListener(new MouseAdapter() {
+        customerTbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
                 //Displays the selected row onto the text fields
-                DefaultTableModel model = (DefaultTableModel)sellersTable.getModel();
-                int myIndex = sellersTable.getSelectedRow();
-                SellID.setText(model.getValueAt(myIndex, 0).toString());
-                SellName.setText(model.getValueAt(myIndex, 1).toString());
-                SellPass.setText(model.getValueAt(myIndex, 2).toString());
+                DefaultTableModel model = (DefaultTableModel)customerTbl.getModel();
+                int myIndex = customerTbl.getSelectedRow();
+                customerID.setText(model.getValueAt(myIndex, 0).toString());
+                customerName.setText(model.getValueAt(myIndex, 1).toString());
+                customerPassword.setText(model.getValueAt(myIndex, 2).toString());
 
             }
         });
-        delBtn.addMouseListener(new MouseAdapter() {
+        deleteBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                if(SellID.getText().isEmpty())
+                if(customerID.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null, "Enter the Seller to be deleted");
                 }
@@ -118,7 +121,7 @@ public class Seller extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                if (SellID.getText().isEmpty() || SellName.getText().isEmpty() || SellPass.getText().isEmpty())
+                if (customerID.getText().isEmpty() || customerName.getText().isEmpty() || customerPassword.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null,"Missing information");
                 }
@@ -137,7 +140,7 @@ public class Seller extends JFrame {
         productLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new Seller().setVisible(true);
+                new Products().setVisible(true);
             }
         });
 
@@ -161,10 +164,11 @@ public class Seller extends JFrame {
     public void SelectSeller(){
         try{
             //connect to text file
-            sellersTable.setModel(null);
+            customerTbl.setModel(null);
         }catch (Exception e){
             e.printStackTrace();
         }
 
     }
+
 }

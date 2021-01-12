@@ -5,16 +5,17 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Categories extends JFrame{
-    private JTextField textField1;
-    private JTextField textField2;
-    private JButton editButton;
-    private JButton addButton;
-    private JButton clearButton;
-    private JTable table1;
-    private JButton deleteButton;
+public class Categories extends JFrame {
     private JPanel mainPanel;
-    private JLabel sellerLbl;
+    private JTextField SellID;
+    private JTextField SellPass;
+    private JTextField SellName;
+    private JButton addBtn;
+    private JButton editBtn;
+    private JButton deleteBtn;
+    private JButton clearBtn;
+    private JTable table1;
+    private JLabel customerLbl;
     private JLabel productsLbl;
     private JLabel logoutLbl;
 
@@ -22,16 +23,18 @@ public class Categories extends JFrame{
         Categories page = new Categories();
         page.setVisible(true);
     }
-    public Categories () {
+
+    public Categories() {
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(750, 400));
         pack();
 
-        sellerLbl.addMouseListener(new MouseAdapter() {
+        customerLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 new Seller().setVisible(true);
+
             }
         });
 
@@ -39,19 +42,15 @@ public class Categories extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 new Products().setVisible(true);
+
             }
         });
 
         logoutLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.exit(0);
+                new Login().setVisible(true);
             }
         });
-
     }
-
-
-
-
 }

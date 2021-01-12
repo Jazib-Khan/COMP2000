@@ -110,7 +110,7 @@ public class Products extends JFrame {
         logoutLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                System.exit(0);
+                new Login().setVisible(true);
             }
         });
 
