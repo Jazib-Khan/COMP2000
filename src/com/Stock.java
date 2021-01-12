@@ -5,10 +5,9 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
+import java.io.*;
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 public class Stock extends JFrame {
     private JPanel mainPanel;
@@ -23,6 +22,7 @@ public class Stock extends JFrame {
     private JLabel categoriesLbl;
     private JLabel logoutLbl;
     private JTextField stockPrice;
+    private JButton viewBtn;
 
     public static void main(String[] args) {
         Stock page = new Stock();
@@ -56,7 +56,7 @@ public class Stock extends JFrame {
 
 
                         BufferedWriter bw = null;
-                        bw = new BufferedWriter(new FileWriter("C:\\Users\\User\\Documents\\GitHub\\COMP2000\\stockTbl.txt", true));
+                        bw = new BufferedWriter(new FileWriter("resources\\stockTbl.txt", true));
                         bw.write(barcode.getText() + "," + stockName.getText() + "," + stockQuantity.getText() + "," + stockPrice.getText());
                         bw.newLine();
                         bw.flush();
@@ -110,5 +110,35 @@ public class Stock extends JFrame {
                 new Login().setVisible(true);
             }
         });
+
+        viewBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+
+                String filepath = "resources\\stockTbl.txt";
+                File file = new File(filepath);
+
+                try {
+                    BufferedReader br = new BufferedReader(new FileReader(file));
+                    String firstLine = br.readLine().trim();
+                    /*String[] columnsName = firstLine.split(",");*/
+                    DefaultTableModel model = (DefaultTableModel) stockTbl.getModel();
+
+                    Object[] tableLines = br.lines().toArray();
+
+                    for (int i =0; i <tableLines.length; i++){
+                        String line = tableLines[i].toString().trim();
+                        String[] dataRow = line.split(",");
+                        model.addRow(dataRow);
+                    }
+                } catch (Exception event) {
+                    event.printStackTrace();
+                }
+
+
+            }
+        });
     }
+
 }
