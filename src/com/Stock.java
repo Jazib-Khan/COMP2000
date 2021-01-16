@@ -57,9 +57,7 @@ public class Stock extends JFrame {
 
                     try {
 
-
                         model.addRow(new Object[]{barcode.getText(), stockName.getText(), stockQuantity.getText(), stockPrice.getText()});
-
 
                         BufferedWriter bw = null;
                         bw = new BufferedWriter(new FileWriter("resources\\stockTbl.txt", true));
@@ -68,8 +66,8 @@ public class Stock extends JFrame {
                         bw.flush();
                         bw.close();
 
-
                         JOptionPane.showMessageDialog(null, "Product added successfully");
+
                     } catch (Exception event) {
                         event.printStackTrace();
                     }

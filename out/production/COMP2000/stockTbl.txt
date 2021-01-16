@@ -3,4 +3,4 @@
 231,Grapes,300,1.20
 154,Toilet Rolls,150,1.05
 876,Semi skimmed milk,103,1.50
-,,,
+976,Whole milk,103,1.50
