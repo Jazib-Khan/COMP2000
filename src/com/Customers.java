@@ -140,7 +140,7 @@ public class Customers extends JFrame {
         productLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new Products().setVisible(true);
+                new Stock().setVisible(true);
             }
         });
 

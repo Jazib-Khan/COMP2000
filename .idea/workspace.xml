@@ -33,7 +33,7 @@
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
   </component>
-  <component name="RunManager" selected="Application.Bill">
+  <component name="RunManager" selected="Application.Stock">
     <configuration name="Bill" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.Bill" />
       <module name="COMP2000" />
@@ -120,34 +120,38 @@
     <servers />
   </component>
   <component name="WindowStateProjectService">
-    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1610463975050">
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser" timestamp="1610479913044">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1610463975050" />
-    <state width="1493" height="206" key="GridCell.Tab.0.bottom" timestamp="1610462902680">
+    <state x="574" y="119" key="#com.intellij.ide.util.MemberChooser/0.0.1536.824@0.0.1536.824" timestamp="1610479913044" />
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1610469436183">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="206" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1610462902680" />
-    <state width="1493" height="206" key="GridCell.Tab.0.center" timestamp="1610462902680">
+    <state x="499" y="159" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1536.824@0.0.1536.824" timestamp="1610469436183" />
+    <state width="1493" height="206" key="GridCell.Tab.0.bottom" timestamp="1610818381513">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="206" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1610462902680" />
-    <state width="1493" height="206" key="GridCell.Tab.0.left" timestamp="1610462902679">
+    <state width="1493" height="206" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1610818381513" />
+    <state width="1493" height="206" key="GridCell.Tab.0.center" timestamp="1610818381513">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="206" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1610462902679" />
-    <state width="1493" height="206" key="GridCell.Tab.0.right" timestamp="1610462902680">
+    <state width="1493" height="206" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1610818381513" />
+    <state width="1493" height="206" key="GridCell.Tab.0.left" timestamp="1610818381512">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state width="1493" height="206" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1610462902680" />
+    <state width="1493" height="206" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1610818381512" />
+    <state width="1493" height="206" key="GridCell.Tab.0.right" timestamp="1610818381513">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state width="1493" height="206" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1610818381513" />
     <state x="249" y="0" key="SettingsEditor" timestamp="1610461481595">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="249" y="0" key="SettingsEditor/0.0.1536.824@0.0.1536.824" timestamp="1610461481595" />
-    <state x="647" y="207" key="UIDesigner.ListEditorDialog" timestamp="1610372071652">
+    <state x="647" y="207" key="UIDesigner.ListEditorDialog" timestamp="1610469496085">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
-    <state x="647" y="207" key="UIDesigner.ListEditorDialog/0.0.1536.824@0.0.1536.824" timestamp="1610372071652" />
+    <state x="647" y="207" key="UIDesigner.ListEditorDialog/0.0.1536.824@0.0.1536.824" timestamp="1610469496085" />
     <state x="815" y="145" width="672" height="678" key="search.everywhere.popup" timestamp="1610321144753">
       <screen x="0" y="0" width="1536" height="824" />
     </state>

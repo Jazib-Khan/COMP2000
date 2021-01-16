@@ -33,7 +33,7 @@ public class Categories extends JFrame {
         customerLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new Seller().setVisible(true);
+                new Customers().setVisible(true);
 
             }
         });
@@ -41,7 +41,7 @@ public class Categories extends JFrame {
         productsLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-                new Products().setVisible(true);
+                new Stock().setVisible(true);
 
             }
         });

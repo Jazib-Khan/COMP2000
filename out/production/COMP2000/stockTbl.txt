@@ -1,6 +1,6 @@
-425,Coke ,300,1
-97678,Freddo,150,0.50
-1234,Colgate,500,0.85
-45,Toilet Paper,450,1
-87658,Pot Noodle,45,2
-32134,Chewing gum,200,0.85
+123,Apples,75,1
+543,Pot Noodles,100,1
+231,Grapes,300,1.20
+154,Toilet Rolls,150,1.05
+876,Semi skimmed milk,103,1.50
+,,,

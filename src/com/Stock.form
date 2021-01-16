@@ -42,14 +42,6 @@
               <text value=""/>
             </properties>
           </component>
-          <component id="42392" class="javax.swing.JButton" binding="editBtn">
-            <constraints>
-              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-            </constraints>
-            <properties>
-              <text value="Edit"/>
-            </properties>
-          </component>
           <component id="cd145" class="javax.swing.JButton" binding="addBtn">
             <constraints>
               <grid row="4" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
@@ -159,6 +151,14 @@
             </constraints>
             <properties>
               <text value="View Stock"/>
+            </properties>
+          </component>
+          <component id="8968d" class="javax.swing.JButton" binding="saveBtn">
+            <constraints>
+              <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="1" fill="1" indent="0" use-parent-layout="false"/>
+            </constraints>
+            <properties>
+              <text value="Save"/>
             </properties>
           </component>
         </children>

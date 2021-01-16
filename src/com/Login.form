@@ -43,7 +43,7 @@
         </constraints>
         <properties>
           <model>
-            <item value="Staff"/>
+            <item value="Admin"/>
             <item value="Customer"/>
           </model>
         </properties>

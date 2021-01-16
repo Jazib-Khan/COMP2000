@@ -12,10 +12,8 @@ import java.util.Scanner;
 
 public class Bill extends JFrame{
     private JTable billTbl;
-    private JTextField billID;
     private JTextField billName;
     private JTextField billQuantity;
-    private JTextField billPrice;
     private JButton editButton;
     private JButton refBtn;
     private JButton addButton;
@@ -47,10 +45,8 @@ public class Bill extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                billID.setText("");
                 billName.setText("");
                 billQuantity.setText("");
-                billPrice.setText("");
             }
         });
 
@@ -60,19 +56,19 @@ public class Bill extends JFrame{
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
                 int i = 0;
-                if (billID.getText().isEmpty() || billName.getText().isEmpty() || billQuantity.getText().isEmpty() || billPrice.getText().isEmpty())
+                if (billName.getText().isEmpty() || billQuantity.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null,"Missing information");
                 }
                 else{
                     i++;
                     if(i == 1){
-                        billTxt.setText(billTxt.getText()+"\n========KWIK-E-MART=========\n"+"NUM   PRODUCT   PRICE   QUANTITY   TOTAL\n"+i+"     "+ billName.getText()+"    "+ billQuantity.getText()+"      "+ billPrice.getText()+"    " );
+                        billTxt.setText(billTxt.getText()+"\n========KWIK-E-MART=========\n"+"NUM   PRODUCT   PRICE   QUANTITY   TOTAL\n"+i+"     "+ billName.getText()+"    "+ billQuantity.getText());
                     }
                     try {
 
                         //Insert the values into the text file
-                        model.addRow(new Object[]{billID.getText(), billName.getText(), billQuantity.getText(), billPrice.getText(), categoryCB.getSelectedItem().toString()});
+                        //model.addRow(new Object[]{billName.getText(), billQuantity.getText(), categoryCB.getSelectedItem().toString()});
                         File file = new File("C:\\Users\\User\\Documents\\GitHub\\COMP2000\\stockTbl.txt");
                         Scanner scan = new Scanner(file);
 
@@ -89,10 +85,7 @@ public class Bill extends JFrame{
                 super.mouseClicked(e);
                 DefaultTableModel model = (DefaultTableModel)billTbl.getModel();
                 int myIndex = billTbl.getSelectedRow();
-                billID.setText(model.getValueAt(myIndex, 1).toString());
-                billName.setText(model.getValueAt(myIndex, 2).toString());
-                billPrice.setText(model.getValueAt(myIndex, 3).toString());
-
+                billName.setText(model.getValueAt(myIndex, 1).toString());
             }
         });
 
