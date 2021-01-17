@@ -48,19 +48,29 @@ public class Kiosk extends JFrame {
             }
         });
 
+
         addBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                int i = 0;
+                DefaultTableModel model = (DefaultTableModel)kioskTbl.getModel();
+                int myIndex = kioskTbl.getSelectedRow();
+                Double price;
+                Double prodTot;
+                price = Double.valueOf(model.getValueAt(myIndex, 3).toString());
+                prodTot = price * Integer.valueOf(kioskQty.getText());
+
                 if (kioskName.getText().isEmpty() || kioskQty.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null,"Missing information");
                 }
                 else{
-                    i++;
-                    if(i == 1){
-                        receiptTxt.setText(receiptTxt.getText()+"\n========KWIK-E-MART=========\n"+"NUM   PRODUCT   PRICE   QUANTITY   TOTAL\n"+i+"     "+ kioskName.getText()+"    "+ kioskQty.getText());
+                    if(!receiptTxt.getText().contains("    =================KWIK-E-MART================\n"))
+                    {
+                        receiptTxt.setText(receiptTxt.getText()+"    =================KWIK-E-MART================\n"+"PRODUCT   QUANTITY   PRICE (£)   TOTAL\n" + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3) + "            " + prodTot.toString() + "\n");
+                    }
+                    else{
+                        receiptTxt.setText(receiptTxt.getText() + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3) + "            " + prodTot.toString() + "\n");
                     }
                     try {
 
@@ -83,13 +93,8 @@ public class Kiosk extends JFrame {
                 DefaultTableModel model = (DefaultTableModel)kioskTbl.getModel();
                 int myIndex = kioskTbl.getSelectedRow();
                 kioskName.setText(model.getValueAt(myIndex, 1).toString());
-            }
-        });
 
-        logoutLbl.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                new Login().setVisible(true);
+
             }
         });
 
@@ -117,6 +122,14 @@ public class Kiosk extends JFrame {
             }
 
         });
+
+        logoutLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new Login().setVisible(true);
+            }
+        });
+
     }
 
 }

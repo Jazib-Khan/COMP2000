@@ -7,16 +7,16 @@ import java.awt.event.MouseEvent;
 
 public class Categories extends JFrame {
     private JPanel mainPanel;
-    private JTextField SellID;
-    private JTextField SellPass;
-    private JTextField SellName;
+    private JTextField catID;
+    private JTextField catDes;
+    private JTextField catName;
     private JButton addBtn;
     private JButton editBtn;
     private JButton deleteBtn;
     private JButton clearBtn;
-    private JTable table1;
+    private JTable catTbl;
     private JLabel customerLbl;
-    private JLabel productsLbl;
+    private JLabel stockLbl;
     private JLabel logoutLbl;
 
     public static void main(String[] args) {
@@ -38,11 +38,10 @@ public class Categories extends JFrame {
             }
         });
 
-        productsLbl.addMouseListener(new MouseAdapter() {
+        stockLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 new Stock().setVisible(true);
-
             }
         });
 

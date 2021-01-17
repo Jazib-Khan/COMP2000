@@ -15,7 +15,6 @@ public class Stock extends JFrame {
     private JTextField barcode;
     private JTextField stockQuantity;
     private JTextField stockName;
-    private JButton deleteBtn;
     private JButton clearBtn;
     private JButton addBtn;
     private JTable stockTbl;
@@ -46,6 +45,20 @@ public class Stock extends JFrame {
         model.setColumnIdentifiers(columnIdentifiers);
         stockTbl.setModel(model);
         stockTbl.getTableHeader().setReorderingAllowed(false);
+
+        stockTbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                //Displays the selected row onto the text fields
+                DefaultTableModel model = (DefaultTableModel) stockTbl.getModel();
+                int myIndex = stockTbl.getSelectedRow();
+                barcode.setText(model.getValueAt(myIndex, 0).toString());
+                stockName.setText(model.getValueAt(myIndex, 1).toString());
+                stockQuantity.setText(model.getValueAt(myIndex, 2).toString());
+                stockPrice.setText(model.getValueAt(myIndex, 3).toString());
+            }
+        });
 
         addBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -86,36 +99,6 @@ public class Stock extends JFrame {
             }
         });
 
-        stockTbl.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                //Displays the selected row onto the text fields
-                DefaultTableModel model = (DefaultTableModel) stockTbl.getModel();
-                int myIndex = stockTbl.getSelectedRow();
-                barcode.setText(model.getValueAt(myIndex, 0).toString());
-                stockName.setText(model.getValueAt(myIndex, 1).toString());
-                stockQuantity.setText(model.getValueAt(myIndex, 2).toString());
-                stockPrice.setText(model.getValueAt(myIndex, 3).toString());
-            }
-        });
-
-
-        categoriesLbl.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                new Categories().setVisible(true);
-            }
-        });
-
-        logoutLbl.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                new Login().setVisible(true);
-
-            }
-        });
-
         viewBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -141,27 +124,6 @@ public class Stock extends JFrame {
             }
         });
 
-
-        deleteBtn.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                super.mouseClicked(e);
-                if(barcode.getText().isEmpty()){
-                    JOptionPane.showMessageDialog(null, "Enter The Stock To Be Deleted");
-                }
-                else{
-                    try{
-                        String filepath = "resources\\stockTbl.txt";
-                        String BID = barcode.getText();
-
-                    }catch (Exception event){
-                        event.printStackTrace();
-                    }
-                }
-            }
-        });
-
-        //if(barcode.getText().isEmpty() || stockName.getText().isEmpty() || stockQuantity.getText().isEmpty() || stockPrice.getText().isEmpty())
 
         saveBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -208,6 +170,22 @@ public class Stock extends JFrame {
                 JOptionPane.showMessageDialog(null, "Table saved");
             }
         });
+
+        categoriesLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new Categories().setVisible(true);
+            }
+        });
+
+        logoutLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new Login().setVisible(true);
+
+            }
+        });
+
     }
 
 }
