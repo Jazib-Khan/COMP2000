@@ -20,6 +20,8 @@ public class Kiosk extends JFrame {
     private JTextArea receiptTxt;
     private JLabel logoutLbl;
     private JButton viewBtn;
+    private JButton cashBtn;
+    private JButton cardBtn;
 
     public static void main(String[] args) {
         Kiosk page = new Kiosk();
@@ -33,7 +35,7 @@ public class Kiosk extends JFrame {
         pack();
 
         //Creates table
-        String[] columnIdentifiers = new String[]{"ID", "Name", "Quantity", "Price (£)", "Category"};
+        String[] columnIdentifiers = new String[]{"ID", "Name", "Quantity", "Price (£)"};
         DefaultTableModel model = new DefaultTableModel();
         model.setColumnIdentifiers(columnIdentifiers);
         kioskTbl.setModel(model);
@@ -93,8 +95,6 @@ public class Kiosk extends JFrame {
                 DefaultTableModel model = (DefaultTableModel)kioskTbl.getModel();
                 int myIndex = kioskTbl.getSelectedRow();
                 kioskName.setText(model.getValueAt(myIndex, 1).toString());
-
-
             }
         });
 
@@ -130,6 +130,20 @@ public class Kiosk extends JFrame {
             }
         });
 
+        cardBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                if (receiptTxt.getText().isEmpty())
+                {
+                    JOptionPane.showMessageDialog(null,"Missing information");
+                }
+                else {
+                    JOptionPane.showMessageDialog(null,"########CARD ACCEPTED TRANSACTION COMPLETED##########");
+                }
+
+            }
+        });
     }
 
 }

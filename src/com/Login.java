@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
+import java.util.Scanner;
 
 public class Login extends JFrame {
     private JPanel LoginPanel;
@@ -12,7 +14,10 @@ public class Login extends JFrame {
     private JComboBox roleCb;
     private JTextField userID;
     private JTextField passID;
+    private JButton registerButton;
 
+
+    private static Scanner x;
 
     public static void main(String[] args) {
         Login page = new Login();
@@ -29,15 +34,48 @@ public class Login extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                //connect to text file
-                //see if matching userID and userPass
-                try{
 
-                }catch (Exception event){
-                    event.printStackTrace();
-                }
+                userID.getText();
+                passID.getText();
+                File file = new File("resources\\customerTbl.txt");
+                verifyLogin(userID.getText(), passID.getText(), file.getAbsolutePath());
+
             }
         });
+
+
+
+        registerButton.addMouseListener(new MouseAdapter() {
+
+        });
     }
+
+    public static void verifyLogin(String user, String pass, String filepath) {
+
+        boolean found = false;
+        String tempUsername = "";
+        String tempPassword = "";
+
+        try {
+            x = new Scanner(new File(filepath));
+            x.useDelimiter("[,\n]");
+
+            while(x.hasNext() && !found){
+                tempUsername = x.next();
+                tempPassword = x.next();
+
+                if(tempUsername.trim().equals(user.trim()) && tempPassword.trim().equals(pass.trim()));{
+                    found = true;
+                }
+            }
+            x.close();
+            System.out.println(found);
+
+        }catch (Exception event){
+            event.printStackTrace();
+        }
+
+    }
+
 
 }
