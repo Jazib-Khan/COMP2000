@@ -4,24 +4,85 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.File;
-import java.util.Scanner;
+import java.io.*;
+
 
 public class Login extends JFrame {
-    private JPanel LoginPanel;
     private JButton loginBtn;
     private JPanel mainPanel;
     private JComboBox roleCb;
     private JTextField userID;
     private JTextField passID;
-    private JButton registerButton;
-
-
-    private static Scanner x;
+    private JButton registerBtn;
+    
+    int ln;
 
     public static void main(String[] args) {
         Login page = new Login();
         page.setVisible(true);
+    }
+
+
+    void addData(String user, String pass, Object role){
+        try {
+            RandomAccessFile raf = new RandomAccessFile("resources\\users.txt", "rw");
+            for(int i=0; i<ln; i++) {
+                raf.readLine();
+            }
+            if(ln>0){
+                raf.writeBytes("\r\n");
+                raf.writeBytes("\r\n");
+            }
+            raf.writeBytes("Username:"+user+ "\r\n");
+            raf.writeBytes("Password:"+pass+ "\r\n");
+            raf.writeBytes("Role:"+role);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    void logic(String user, String pass, Object role){
+        try {
+            RandomAccessFile raf = new RandomAccessFile("resources\\users.txt", "rw");
+            for(int i=0;i<ln;i+=4){ System.out.println("count " +i);
+
+                String forUser = raf.readLine().substring(9);
+                String forPass = raf.readLine().substring(9);
+                
+                if(user.equals(forUser) & pass.equals(forPass) & role.equals("Customer")){
+                    new Kiosk().setVisible(true);
+                    dispose();
+                    break;
+                }else if(user.equals(forUser) & pass.equals(forPass) & role.equals("Admin")){
+                    new Stock().setVisible(true);
+                    dispose();
+                    break;
+                }else if(i==(ln-3)){
+                    JOptionPane.showMessageDialog(null,"Incorrect Username/Password");
+                    break;
+                }
+                for (int k=1; k<=2; k++){
+                    raf.readLine();
+                }
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    void countLines(){
+        try {
+            ln=0;
+            RandomAccessFile raf = new RandomAccessFile("resources\\users.txt", "rw");
+            for(int i=0; raf.readLine() !=null; i++){
+                ln++;
+            }
+            System.out.println("number of lines:" + ln);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public Login(){
@@ -35,47 +96,21 @@ public class Login extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                userID.getText();
-                passID.getText();
-                File file = new File("resources\\customerTbl.txt");
-                verifyLogin(userID.getText(), passID.getText(), file.getAbsolutePath());
+                countLines();
+                logic(userID.getText(), passID.getText(), roleCb.getSelectedItem());
 
             }
         });
 
+        registerBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
 
-
-        registerButton.addMouseListener(new MouseAdapter() {
-
-        });
-    }
-
-    public static void verifyLogin(String user, String pass, String filepath) {
-
-        boolean found = false;
-        String tempUsername = "";
-        String tempPassword = "";
-
-        try {
-            x = new Scanner(new File(filepath));
-            x.useDelimiter("[,\n]");
-
-            while(x.hasNext() && !found){
-                tempUsername = x.next();
-                tempPassword = x.next();
-
-                if(tempUsername.trim().equals(user.trim()) && tempPassword.trim().equals(pass.trim()));{
-                    found = true;
-                }
+                countLines();
+                addData(userID.getText(), passID.getText(), roleCb.getSelectedItem());
             }
-            x.close();
-            System.out.println(found);
-
-        }catch (Exception event){
-            event.printStackTrace();
-        }
+        });
 
     }
-
-
 }

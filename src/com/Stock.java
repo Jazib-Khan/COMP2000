@@ -18,7 +18,6 @@ public class Stock extends JFrame {
     private JButton clearBtn;
     private JButton addBtn;
     private JTable stockTbl;
-    private JLabel categoriesLbl;
     private JLabel logoutLbl;
     private JTextField stockPrice;
     private JButton viewBtn;
@@ -171,17 +170,12 @@ public class Stock extends JFrame {
             }
         });
 
-        categoriesLbl.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                new Categories().setVisible(true);
-            }
-        });
 
         logoutLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 new Login().setVisible(true);
+                dispose();
 
             }
         });

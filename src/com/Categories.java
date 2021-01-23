@@ -15,7 +15,6 @@ public class Categories extends JFrame {
     private JButton deleteBtn;
     private JButton clearBtn;
     private JTable catTbl;
-    private JLabel customerLbl;
     private JLabel stockLbl;
     private JLabel logoutLbl;
 
@@ -30,13 +29,6 @@ public class Categories extends JFrame {
         setPreferredSize(new Dimension(750, 400));
         pack();
 
-        customerLbl.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                new Customers().setVisible(true);
-
-            }
-        });
 
         stockLbl.addMouseListener(new MouseAdapter() {
             @Override
@@ -48,6 +40,7 @@ public class Categories extends JFrame {
         logoutLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
                 new Login().setVisible(true);
             }
         });

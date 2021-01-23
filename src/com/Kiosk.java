@@ -2,12 +2,12 @@ package com;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Kiosk extends JFrame {
@@ -22,6 +22,7 @@ public class Kiosk extends JFrame {
     private JButton viewBtn;
     private JButton cashBtn;
     private JButton cardBtn;
+    private JButton saveBtn;
 
     public static void main(String[] args) {
         Kiosk page = new Kiosk();
@@ -47,6 +48,15 @@ public class Kiosk extends JFrame {
                 super.mouseClicked(e);
                 kioskName.setText("");
                 kioskQty.setText("");
+                receiptTxt.setText("");
+
+                try{
+                    BufferedWriter bw = null;
+                    bw = new BufferedWriter(new FileWriter("resources\\receipt.txt"));
+                    bw.write("");
+                }catch (Exception event){
+                    event.printStackTrace();
+                }
             }
         });
 
@@ -57,10 +67,16 @@ public class Kiosk extends JFrame {
                 super.mouseClicked(e);
                 DefaultTableModel model = (DefaultTableModel)kioskTbl.getModel();
                 int myIndex = kioskTbl.getSelectedRow();
-                Double price;
-                Double prodTot;
-                price = Double.valueOf(model.getValueAt(myIndex, 3).toString());
-                prodTot = price * Integer.valueOf(kioskQty.getText());
+
+                double price;
+                double prodTot;
+                double total;
+                String pName;
+                String pQuantity;
+                pName = model.getValueAt(myIndex, 1).toString();
+                pQuantity = model.getValueAt(myIndex, 2).toString();
+                price = Double.parseDouble(model.getValueAt(myIndex, 3).toString());
+                prodTot = price * Integer.parseInt(kioskQty.getText());
 
                 if (kioskName.getText().isEmpty() || kioskQty.getText().isEmpty())
                 {
@@ -69,17 +85,19 @@ public class Kiosk extends JFrame {
                 else{
                     if(!receiptTxt.getText().contains("    =================KWIK-E-MART================\n"))
                     {
-                        receiptTxt.setText(receiptTxt.getText()+"    =================KWIK-E-MART================\n"+"PRODUCT   QUANTITY   PRICE (£)   TOTAL\n" + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3) + "            " + prodTot.toString() + "\n");
+                        receiptTxt.setText(receiptTxt.getText()+"    =================KWIK-E-MART================\n"+"PRODUCT   QUANTITY   PRICE (£)   TOTAL\n" + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3)  + "            " + Double.toString(prodTot) + "\n");
                     }
                     else{
-                        receiptTxt.setText(receiptTxt.getText() + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3) + "            " + prodTot.toString() + "\n");
+                        receiptTxt.setText(receiptTxt.getText() + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3) + "            " + Double.toString(prodTot) + "\n");
                     }
                     try {
 
-                        //Insert the values into the text file
-                        //model.addRow(new Object[]{billName.getText(), billQuantity.getText(), categoryCB.getSelectedItem().toString()});
-                        File file = new File("resources\\stockTbl.txt");
-                        Scanner scan = new Scanner(file);
+                        BufferedWriter bw = null;
+                        bw = new BufferedWriter(new FileWriter("resources\\receipt.txt", true));
+                        bw.write(pName + "," + pQuantity + "," + price + "," + prodTot);
+                        bw.newLine();
+                        bw.flush();
+                        bw.close();
 
                     } catch (Exception event) {
                         event.printStackTrace();
@@ -95,6 +113,7 @@ public class Kiosk extends JFrame {
                 DefaultTableModel model = (DefaultTableModel)kioskTbl.getModel();
                 int myIndex = kioskTbl.getSelectedRow();
                 kioskName.setText(model.getValueAt(myIndex, 1).toString());
+
             }
         });
 
@@ -123,13 +142,6 @@ public class Kiosk extends JFrame {
 
         });
 
-        logoutLbl.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-                new Login().setVisible(true);
-            }
-        });
-
         cardBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -140,10 +152,27 @@ public class Kiosk extends JFrame {
                 }
                 else {
                     JOptionPane.showMessageDialog(null,"########CARD ACCEPTED TRANSACTION COMPLETED##########");
+                    try{
+                        BufferedWriter bw = null;
+                        bw = new BufferedWriter(new FileWriter("resources\\receipt.txt"));
+                        bw.write("");
+                    }catch (Exception event){
+                        event.printStackTrace();
+                    }
+                    new Login().setVisible(true);
+                    dispose();
                 }
-
             }
         });
+
+        logoutLbl.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                new Login().setVisible(true);
+                dispose();
+            }
+        });
+
     }
 
 }

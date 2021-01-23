@@ -1,5 +1,0 @@
-Username:Jazib
-Password:fsda
-
-Username:Mohid
-Password:flag
