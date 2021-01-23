@@ -9,6 +9,7 @@ import java.awt.event.MouseEvent;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.text.DecimalFormat;
 
 public class Kiosk extends JFrame {
     private JPanel mainPanel;
@@ -22,12 +23,15 @@ public class Kiosk extends JFrame {
     private JButton viewBtn;
     private JButton cashBtn;
     private JButton cardBtn;
+    private JLabel totalLbl;
     private JButton saveBtn;
 
     public static void main(String[] args) {
         Kiosk page = new Kiosk();
         page.setVisible(true);
     }
+
+    private static DecimalFormat df = new DecimalFormat("0.00");
 
     public Kiosk() {
         setContentPane(mainPanel);
@@ -60,6 +64,7 @@ public class Kiosk extends JFrame {
             }
         });
 
+        final double[] total = {0.0};
 
         addBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -70,26 +75,42 @@ public class Kiosk extends JFrame {
 
                 double price;
                 double prodTot;
-                double total;
+                int AvailQty;
                 String pName;
                 String pQuantity;
+
+
+                AvailQty = Integer.parseInt(model.getValueAt(myIndex, 2).toString());
                 pName = model.getValueAt(myIndex, 1).toString();
                 pQuantity = model.getValueAt(myIndex, 2).toString();
                 price = Double.parseDouble(model.getValueAt(myIndex, 3).toString());
                 prodTot = price * Integer.parseInt(kioskQty.getText());
+                total[0] = total[0] + prodTot;
+
+                try{
+                    BufferedWriter bw = null;
+                    bw = new BufferedWriter(new FileWriter("resources\\receipt.txt"));
+                    bw.write("");
+                }catch (Exception event){
+                    event.printStackTrace();
+                }
 
                 if (kioskName.getText().isEmpty() || kioskQty.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null,"Missing information");
                 }
+                else if( AvailQty < Integer.parseInt(kioskQty.getText())){
+                    JOptionPane.showMessageDialog(null,"Not Enough Stock");
+                }
                 else{
                     if(!receiptTxt.getText().contains("    =================KWIK-E-MART================\n"))
                     {
-                        receiptTxt.setText(receiptTxt.getText()+"    =================KWIK-E-MART================\n"+"PRODUCT   QUANTITY   PRICE (£)   TOTAL\n" + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3)  + "            " + Double.toString(prodTot) + "\n");
+                        receiptTxt.setText(receiptTxt.getText()+"    =================KWIK-E-MART================\n"+"PRODUCT   QUANTITY   PRICE (£)   TOTAL\n" + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3)  + "            " + df.format(prodTot) + "\n");
                     }
                     else{
-                        receiptTxt.setText(receiptTxt.getText() + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3) + "            " + Double.toString(prodTot) + "\n");
+                        receiptTxt.setText(receiptTxt.getText() + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3) + "            " + df.format(prodTot) + "\n");
                     }
+                    totalLbl.setText("Total: £" + df.format(total[0]));
                     try {
 
                         BufferedWriter bw = null;
@@ -113,7 +134,6 @@ public class Kiosk extends JFrame {
                 DefaultTableModel model = (DefaultTableModel)kioskTbl.getModel();
                 int myIndex = kioskTbl.getSelectedRow();
                 kioskName.setText(model.getValueAt(myIndex, 1).toString());
-
             }
         });
 

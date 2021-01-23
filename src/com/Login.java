@@ -6,7 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
 
-
 public class Login extends JFrame {
     private JButton loginBtn;
     private JPanel mainPanel;
@@ -14,14 +13,13 @@ public class Login extends JFrame {
     private JTextField userID;
     private JTextField passID;
     private JButton registerBtn;
-    
+
     int ln;
 
     public static void main(String[] args) {
         Login page = new Login();
         page.setVisible(true);
     }
-
 
     void addData(String user, String pass, Object role){
         try {
@@ -111,6 +109,5 @@ public class Login extends JFrame {
                 addData(userID.getText(), passID.getText(), roleCb.getSelectedItem());
             }
         });
-
     }
 }
