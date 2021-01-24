@@ -72,7 +72,7 @@ public class Stock extends JFrame {
                         model.addRow(new Object[]{barcode.getText(), stockName.getText(), stockQuantity.getText(), stockPrice.getText()});
 
                         BufferedWriter bw = null;
-                        bw = new BufferedWriter(new FileWriter("resources\\stockTbl.txt", true));
+                        bw = new BufferedWriter(new FileWriter("resources\\stock.txt", true));
                         bw.write(barcode.getText() + "," + stockName.getText() + "," + stockQuantity.getText() + "," + stockPrice.getText());
                         bw.newLine();
                         bw.flush();
@@ -103,7 +103,7 @@ public class Stock extends JFrame {
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
 
-                String filepath = "resources\\stockTbl.txt";
+                String filepath = "resources\\stock.txt";
                 File file = new File(filepath);
 
                 try {
@@ -139,7 +139,7 @@ public class Stock extends JFrame {
                 try {
                     //empty the file
                     BufferedWriter bw = null;
-                    bw = new BufferedWriter(new FileWriter("resources\\stockTbl.txt"));
+                    bw = new BufferedWriter(new FileWriter("resources\\stock.txt"));
                     bw.write("");
                     bw.close();
                 }catch(Exception event){
@@ -155,7 +155,7 @@ public class Stock extends JFrame {
 
                     try {
                         BufferedWriter bw = null;
-                        bw = new BufferedWriter(new FileWriter("resources\\stockTbl.txt", true));
+                        bw = new BufferedWriter(new FileWriter("resources\\stock.txt", true));
                         bw.write(String.join(",", result));
                         bw.newLine();
                         bw.flush();
@@ -164,7 +164,6 @@ public class Stock extends JFrame {
                     }catch (Exception event) {
                         event.printStackTrace();
                     }
-
                 }
                 JOptionPane.showMessageDialog(null, "Table saved");
             }

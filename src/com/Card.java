@@ -5,18 +5,18 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class Cash extends JFrame{
-    private JTextField gTotal;
-    private JTextField money;
+public class Card extends JFrame{
     private JPanel mainPanel;
+    private JTextField gTotal;
     private JButton payBtn;
+    private JButton decBtn;
     private double total;
 
     public static void main(String[] args) {
 
     }
 
-    public Cash(double total) {
+    public Card(double total) {
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(800, 600));
@@ -32,23 +32,19 @@ public class Cash extends JFrame{
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                JOptionPane.showMessageDialog(null, "CARD ACCEPTED BANK AUTHORISED CARD");
+                new Login().setVisible(true);
+                dispose();
+            }
+        });
 
-                double cash = Double.parseDouble(money.getText());
-                if (cash < total){
-                    JOptionPane.showMessageDialog(null, "Require " + (total - cash));
-                }
-                else {
-                    JOptionPane.showMessageDialog(null, "Payment taken");
-                    new Login().setVisible(true);
-                    dispose();
-                }
-
+        decBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                new Login().setVisible(true);
+                dispose();
             }
         });
     }
-
-
-
-
-
 }

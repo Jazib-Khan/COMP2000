@@ -1,7 +1,3 @@
 Username:Jazib
 Password:Khan
-Role:Admin
-
-Username:Mohid
-Password:Khan
-Role:Admin
+Role:Customer

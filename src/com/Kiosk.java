@@ -2,14 +2,12 @@ package com;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableCellEditor;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Scanner;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class Kiosk extends JFrame {
     private JPanel mainPanel;
@@ -24,10 +22,13 @@ public class Kiosk extends JFrame {
     private JButton cashBtn;
     private JButton cardBtn;
     private JLabel totalLbl;
+    private JFrame instance;
     private JButton saveBtn;
+    final double[] total = {0.0};
 
     public static void main(String[] args) {
         Kiosk page = new Kiosk();
+        page.instance = page;
         page.setVisible(true);
     }
 
@@ -39,20 +40,20 @@ public class Kiosk extends JFrame {
         setPreferredSize(new Dimension(800, 600));
         pack();
 
-        //Creates table
-        String[] columnIdentifiers = new String[]{"ID", "Name", "Quantity", "Price (£)"};
-        DefaultTableModel model = new DefaultTableModel();
-        model.setColumnIdentifiers(columnIdentifiers);
-        kioskTbl.setModel(model);
-        kioskTbl.getTableHeader().setReorderingAllowed(false);
+
 
         clearBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+
+                viewStock(kioskTbl);
+
                 kioskName.setText("");
                 kioskQty.setText("");
                 receiptTxt.setText("");
+                totalLbl.setText("");
+
 
                 try{
                     BufferedWriter bw = null;
@@ -64,7 +65,6 @@ public class Kiosk extends JFrame {
             }
         });
 
-        final double[] total = {0.0};
 
         addBtn.addMouseListener(new MouseAdapter() {
             @Override
@@ -75,31 +75,35 @@ public class Kiosk extends JFrame {
 
                 double price;
                 double prodTot;
-                int AvailQty;
+                int availQty;
+
                 String pName;
                 String pQuantity;
 
 
-                AvailQty = Integer.parseInt(model.getValueAt(myIndex, 2).toString());
+                availQty = Integer.parseInt(model.getValueAt(myIndex, 2).toString());
+                int newQty = availQty - Integer.parseInt(kioskQty.getText());
                 pName = model.getValueAt(myIndex, 1).toString();
                 pQuantity = model.getValueAt(myIndex, 2).toString();
                 price = Double.parseDouble(model.getValueAt(myIndex, 3).toString());
                 prodTot = price * Integer.parseInt(kioskQty.getText());
                 total[0] = total[0] + prodTot;
 
-                try{
-                    BufferedWriter bw = null;
-                    bw = new BufferedWriter(new FileWriter("resources\\receipt.txt"));
-                    bw.write("");
-                }catch (Exception event){
-                    event.printStackTrace();
+                if (receiptTxt.getText().equals("")){
+                    try{
+                        BufferedWriter bw = null;
+                        bw = new BufferedWriter(new FileWriter("resources\\receipt.txt"));
+                        bw.write("");
+                    }catch (Exception event){
+                        event.printStackTrace();
+                    }
                 }
 
                 if (kioskName.getText().isEmpty() || kioskQty.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null,"Missing information");
                 }
-                else if( AvailQty < Integer.parseInt(kioskQty.getText())){
+                else if( availQty < Integer.parseInt(kioskQty.getText())){
                     JOptionPane.showMessageDialog(null,"Not Enough Stock");
                 }
                 else{
@@ -111,11 +115,13 @@ public class Kiosk extends JFrame {
                         receiptTxt.setText(receiptTxt.getText() + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3) + "            " + df.format(prodTot) + "\n");
                     }
                     totalLbl.setText("Total: £" + df.format(total[0]));
+                    kioskTbl.setValueAt(newQty, myIndex, 2);
+
                     try {
 
                         BufferedWriter bw = null;
                         bw = new BufferedWriter(new FileWriter("resources\\receipt.txt", true));
-                        bw.write(pName + "," + pQuantity + "," + price + "," + prodTot);
+                        bw.write(pName + "," + pQuantity + "," + price + "," + df.format(prodTot));
                         bw.newLine();
                         bw.flush();
                         bw.close();
@@ -141,25 +147,8 @@ public class Kiosk extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                String filepath = "resources\\stockTbl.txt";
-                File file = new File(filepath);
-
-                try {
-                    BufferedReader br = new BufferedReader(new FileReader(file));
-                    DefaultTableModel model = (DefaultTableModel) kioskTbl.getModel();
-
-                    Object[] tableLines = br.lines().toArray();
-
-                    for (int i =0; i <tableLines.length; i++){
-                        String line = tableLines[i].toString().trim();
-                        String[] dataRow = line.split(",");
-                        model.addRow(dataRow);
-                    }
-                } catch (Exception event) {
-                    event.printStackTrace();
-                }
+                viewStock(kioskTbl);
             }
-
         });
 
         cardBtn.addMouseListener(new MouseAdapter() {
@@ -171,17 +160,20 @@ public class Kiosk extends JFrame {
                     JOptionPane.showMessageDialog(null,"Missing information");
                 }
                 else {
-                    JOptionPane.showMessageDialog(null,"########CARD ACCEPTED TRANSACTION COMPLETED##########");
-                    try{
-                        BufferedWriter bw = null;
-                        bw = new BufferedWriter(new FileWriter("resources\\receipt.txt"));
-                        bw.write("");
-                    }catch (Exception event){
-                        event.printStackTrace();
-                    }
-                    new Login().setVisible(true);
-                    dispose();
+                    checkout(kioskTbl);
+                    new Card(total[0]).setVisible(true);
+                    instance.setVisible(false);
                 }
+            }
+        });
+
+        cashBtn.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                super.mouseClicked(e);
+                checkout(kioskTbl);
+                new Cash(total[0]).setVisible(true);
+                instance.setVisible(false);
             }
         });
 
@@ -192,6 +184,71 @@ public class Kiosk extends JFrame {
                 dispose();
             }
         });
+    }
+
+    private static void viewStock(JTable kioskTbl){
+        String filepath = "resources\\stock.txt";
+        File file = new File(filepath);
+
+
+        //Creates table
+        String[] columnIdentifiers = new String[]{"ID", "Name", "Quantity", "Price (£)"};
+        DefaultTableModel model = new DefaultTableModel();
+        model.setColumnIdentifiers(columnIdentifiers);
+        kioskTbl.setModel(model);
+        kioskTbl.getTableHeader().setReorderingAllowed(false);
+
+
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(file));
+            model = (DefaultTableModel) kioskTbl.getModel();
+
+            Object[] tableLines = br.lines().toArray();
+
+            for (int i =0; i <tableLines.length; i++){
+                String line = tableLines[i].toString().trim();
+                String[] dataRow = line.split(",");
+                model.addRow(dataRow);
+            }
+        } catch (Exception event) {
+            event.printStackTrace();
+        }
+    }
+
+    private static void checkout(JTable kioskTbl) {
+
+        int rows = kioskTbl.getRowCount();
+        int cols = kioskTbl.getColumnCount();
+
+        try {
+            //empty the file
+            BufferedWriter bw = null;
+            bw = new BufferedWriter(new FileWriter("resources\\stock.txt"));
+            bw.write("");
+            bw.close();
+        } catch (Exception event) {
+            event.printStackTrace();
+        }
+
+
+        for (int i = 0; i < rows; i++) {
+            ArrayList<String> result = new ArrayList<String>();
+            for (int j = 0; j < cols; j++) {
+                result.add(kioskTbl.getModel().getValueAt(i, j).toString());
+            }
+
+            try {
+                BufferedWriter bw = null;
+                bw = new BufferedWriter(new FileWriter("resources\\stock.txt", true));
+                bw.write(String.join(",", result));
+                bw.newLine();
+                bw.flush();
+                bw.close();
+
+            } catch (Exception event) {
+                event.printStackTrace();
+            }
+        }
 
     }
 
