@@ -1,4 +1,4 @@
 425,Coke ,300,1
-97678,Freddo,150,0.50
-1234,Colgate,499,0.85
-45,Toilet Paper,447,1
+97678,Freddo,147,0.50
+1234,Colgate,399,0.85
+45,Toilet Paper,444,1
