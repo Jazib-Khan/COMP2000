@@ -47,7 +47,8 @@ public class Kiosk extends JFrame {
                 super.mouseClicked(e);
                 //function when clicked clears everything to allow user to reset
 
-                //
+                //view stock function is called so that if changes were made to the stock before clearing the bill
+                //it will reset to what the original amount of stock is available since a purchase hadn't yet been made
                 viewStock(kioskTbl);
 
                 //Clears the text fields and text area by setting the text empty
@@ -139,6 +140,7 @@ public class Kiosk extends JFrame {
                 else {
                     //Proceeds to the checkout function when the user has items in the bill
                     checkout(kioskTbl);
+                    //Takes in the total price for the user to make the purchase
                     new Card(total[0]).setVisible(true);
                     instance.setVisible(false);
                 }
@@ -149,11 +151,14 @@ public class Kiosk extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                //Validation if the user tries to make a purchase without adding anything to the bill
                 if (receiptTxt.getText().isEmpty()){
                     JOptionPane.showMessageDialog(null, "Missing information");
                 }
                 else {
+                    //Proceeds to the checkout function when the user has items in the bill
                     checkout(kioskTbl);
+                    //Takes in the total price for the user to make the purchase
                     new Cash(total[0]).setVisible(true);
                     instance.setVisible(false);
                 }
@@ -163,6 +168,7 @@ public class Kiosk extends JFrame {
         logoutLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //Goes to the login menu
                 new Login().setVisible(true);
                 dispose();
             }
@@ -170,9 +176,9 @@ public class Kiosk extends JFrame {
     }
 
     private static void viewStock(JTable kioskTbl){
+
         String filepath = "resources\\stock.txt";
         File file = new File(filepath);
-
 
         //Creates table
         String[] columnIdentifiers = new String[]{"ID", "Name", "Quantity", "Price (£)"};
@@ -182,12 +188,12 @@ public class Kiosk extends JFrame {
         kioskTbl.getTableHeader().setReorderingAllowed(false);
 
 
-        try {
+        try {//File reader to open the text file
             BufferedReader br = new BufferedReader(new FileReader(file));
             model = (DefaultTableModel) kioskTbl.getModel();
 
             Object[] tableLines = br.lines().toArray();
-
+            //For loop to take in the rows and columns seperate the values with "," and to insert the data entries
             for (int i =0; i <tableLines.length; i++){
                 String line = tableLines[i].toString().trim();
                 String[] dataRow = line.split(",");
@@ -213,14 +219,14 @@ public class Kiosk extends JFrame {
             event.printStackTrace();
         }
 
-
+        //For loop to go through table and retrieve values
         for (int i = 0; i < rows; i++) {
             ArrayList<String> result = new ArrayList<String>();
             for (int j = 0; j < cols; j++) {
                 result.add(kioskTbl.getModel().getValueAt(i, j).toString());
             }
 
-            try {
+            try { //writes into the text file
                 BufferedWriter bw = null;
                 bw = new BufferedWriter(new FileWriter("resources\\stock.txt", true));
                 bw.write(String.join(",", result));

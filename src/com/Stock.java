@@ -36,6 +36,7 @@ public class Stock extends JFrame {
         setPreferredSize(new Dimension(800, 600));
         pack();
 
+        //Creates table
         String[] columnIdentifiers = new String[]{"BarCode", "Name", "Quantity", "Price (£)"};
         DefaultTableModel model = new DefaultTableModel() {
             @Override
@@ -65,21 +66,22 @@ public class Stock extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                //Validation if some of the text fields are left blank then the stock won't be added in
                 if (barcode.getText().isEmpty() || stockName.getText().isEmpty() || stockQuantity.getText().isEmpty() || stockPrice.getText().isEmpty()) {
                     JOptionPane.showMessageDialog(null, "Missing information");
                 } else {
 
                     try {
-
+                        //adds the values into the j table
                         model.addRow(new Object[]{barcode.getText(), stockName.getText(), stockQuantity.getText(), stockPrice.getText()});
-
+                        //adds the values into the text file
                         BufferedWriter bw = null;
                         bw = new BufferedWriter(new FileWriter("resources\\stock.txt", true));
                         bw.write(barcode.getText() + "," + stockName.getText() + "," + stockQuantity.getText() + "," + stockPrice.getText());
                         bw.newLine();
                         bw.flush();
                         bw.close();
-
+                        //Prompts the user that the product has been added
                         JOptionPane.showMessageDialog(null, "Product added successfully");
 
                     } catch (Exception event) {
@@ -89,6 +91,7 @@ public class Stock extends JFrame {
             }
         });
 
+        //When clicked will clear everything in the text fields
         clearBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
@@ -108,12 +111,13 @@ public class Stock extends JFrame {
                 String filepath = "resources\\stock.txt";
                 File file = new File(filepath);
 
-                try {
+                try { //reads from the file
                     BufferedReader br = new BufferedReader(new FileReader(file));
                     DefaultTableModel model = (DefaultTableModel) stockTbl.getModel();
 
                     Object[] tableLines = br.lines().toArray();
 
+                    //reads all the lines in the file and displays it accordingly
                     for (int i =0; i <tableLines.length; i++){
                         String line = tableLines[i].toString().trim();
                         String[] dataRow = line.split(",");
@@ -155,7 +159,7 @@ public class Stock extends JFrame {
                         result.add(stockTbl.getModel().getValueAt(i, j).toString());
                     }
 
-                    try {
+                    try { //Writes in the file of what the current J table is thus saving the most up to date products
                         BufferedWriter bw = null;
                         bw = new BufferedWriter(new FileWriter("resources\\stock.txt", true));
                         bw.write(String.join(",", result));
@@ -175,12 +179,10 @@ public class Stock extends JFrame {
         logoutLbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+                //Takes the user back to eh login menu
                 new Login().setVisible(true);
                 dispose();
-
             }
         });
-
     }
-
 }
