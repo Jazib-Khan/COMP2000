@@ -24,11 +24,13 @@ public class Stock extends JFrame {
     private JButton saveBtn;
 
     public static void main(String[] args) {
+        //Displays the panel
         Stock page = new Stock();
         page.setVisible(true);
     }
 
     public Stock() {
+        //Adjusts the panel
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(800, 600));

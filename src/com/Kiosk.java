@@ -23,45 +23,39 @@ public class Kiosk extends JFrame {
     private JButton cardBtn;
     private JLabel totalLbl;
     private JFrame instance;
-    private JButton saveBtn;
     final double[] total = {0.0};
+    private static final DecimalFormat df = new DecimalFormat("0.00"); //Rounds the price to 2 decimal places
 
     public static void main(String[] args) {
+        //Displays the kiosk gui form
         Kiosk page = new Kiosk();
         page.instance = page;
         page.setVisible(true);
     }
 
-    private static DecimalFormat df = new DecimalFormat("0.00");
-
     public Kiosk() {
+        //Adjusts the gui panel
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setPreferredSize(new Dimension(800, 600));
         pack();
 
 
-
         clearBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                //function when clicked clears everything to allow user to reset
 
+                //
                 viewStock(kioskTbl);
 
+                //Clears the text fields and text area by setting the text empty
                 kioskName.setText("");
                 kioskQty.setText("");
                 receiptTxt.setText("");
                 totalLbl.setText("");
 
-
-                try{
-                    BufferedWriter bw = null;
-                    bw = new BufferedWriter(new FileWriter("resources\\receipt.txt"));
-                    bw.write("");
-                }catch (Exception event){
-                    event.printStackTrace();
-                }
             }
         });
 
@@ -70,6 +64,8 @@ public class Kiosk extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+
+                //Gets the model of the J table
                 DefaultTableModel model = (DefaultTableModel)kioskTbl.getModel();
                 int myIndex = kioskTbl.getSelectedRow();
 
@@ -77,36 +73,27 @@ public class Kiosk extends JFrame {
                 double prodTot;
                 int availQty;
 
-                String pName;
-                String pQuantity;
-
-
+                //Variable available quantity is to get the value of the stock of the particular cell
                 availQty = Integer.parseInt(model.getValueAt(myIndex, 2).toString());
+                //The new quantity then becomes what the available quantity was with how much the user has taken to add to the bill
                 int newQty = availQty - Integer.parseInt(kioskQty.getText());
-                pName = model.getValueAt(myIndex, 1).toString();
-                pQuantity = model.getValueAt(myIndex, 2).toString();
+
                 price = Double.parseDouble(model.getValueAt(myIndex, 3).toString());
+                //Calculates the total price of a particular item if the user has bought in quantity
                 prodTot = price * Integer.parseInt(kioskQty.getText());
+                //Calculates the grand total price of all the items in the bill
                 total[0] = total[0] + prodTot;
 
-                if (receiptTxt.getText().equals("")){
-                    try{
-                        BufferedWriter bw = null;
-                        bw = new BufferedWriter(new FileWriter("resources\\receipt.txt"));
-                        bw.write("");
-                    }catch (Exception event){
-                        event.printStackTrace();
-                    }
-                }
-
+                //Validation if the user hasn't entered anything
                 if (kioskName.getText().isEmpty() || kioskQty.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null,"Missing information");
                 }
+                //Validation if the user has tried to order more then what is available
                 else if( availQty < Integer.parseInt(kioskQty.getText())){
                     JOptionPane.showMessageDialog(null,"Not Enough Stock");
                 }
-                else{
+                else{//Prints to the text area like a receipt
                     if(!receiptTxt.getText().contains("    =================KWIK-E-MART================\n"))
                     {
                         receiptTxt.setText(receiptTxt.getText()+"    =================KWIK-E-MART================\n"+"PRODUCT   QUANTITY   PRICE (£)   TOTAL\n" + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3)  + "            " + df.format(prodTot) + "\n");
@@ -114,21 +101,9 @@ public class Kiosk extends JFrame {
                     else{
                         receiptTxt.setText(receiptTxt.getText() + kioskName.getText() + "            " + kioskQty.getText() + "                " + kioskTbl.getValueAt(myIndex,3) + "            " + df.format(prodTot) + "\n");
                     }
+                    //Prints the total price of the bill and wraps it 2 decimal places
                     totalLbl.setText("Total: £" + df.format(total[0]));
                     kioskTbl.setValueAt(newQty, myIndex, 2);
-
-                    try {
-
-                        BufferedWriter bw = null;
-                        bw = new BufferedWriter(new FileWriter("resources\\receipt.txt", true));
-                        bw.write(pName + "," + pQuantity + "," + price + "," + df.format(prodTot));
-                        bw.newLine();
-                        bw.flush();
-                        bw.close();
-
-                    } catch (Exception event) {
-                        event.printStackTrace();
-                    }
                 }
             }
         });
@@ -137,6 +112,7 @@ public class Kiosk extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                //Grabs the table model and sets the text fields to what's been selected to save the user time when adding to the bill
                 DefaultTableModel model = (DefaultTableModel)kioskTbl.getModel();
                 int myIndex = kioskTbl.getSelectedRow();
                 kioskName.setText(model.getValueAt(myIndex, 1).toString());
@@ -155,11 +131,13 @@ public class Kiosk extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                //Validation if the user tries to make a purchase without adding anything to the bill
                 if (receiptTxt.getText().isEmpty())
                 {
                     JOptionPane.showMessageDialog(null,"Missing information");
                 }
                 else {
+                    //Proceeds to the checkout function when the user has items in the bill
                     checkout(kioskTbl);
                     new Card(total[0]).setVisible(true);
                     instance.setVisible(false);
@@ -171,9 +149,14 @@ public class Kiosk extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-                checkout(kioskTbl);
-                new Cash(total[0]).setVisible(true);
-                instance.setVisible(false);
+                if (receiptTxt.getText().isEmpty()){
+                    JOptionPane.showMessageDialog(null, "Missing information");
+                }
+                else {
+                    checkout(kioskTbl);
+                    new Cash(total[0]).setVisible(true);
+                    instance.setVisible(false);
+                }
             }
         });
 
@@ -249,7 +232,5 @@ public class Kiosk extends JFrame {
                 event.printStackTrace();
             }
         }
-
     }
-
 }
