@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="com.View.Kiosk">
+  <grid id="27dc6" binding="mainPanel" layout-manager="GridLayoutManager" row-count="9" column-count="10" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="731" height="501"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="adccf" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="8" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Kiosk"/>
+        </properties>
+      </component>
+      <vspacer id="c22a0">
+        <constraints>
+          <grid row="1" column="9" row-span="8" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <scrollpane id="5849c">
+        <constraints>
+          <grid row="2" column="5" row-span="1" col-span="3" vsize-policy="7" hsize-policy="7" anchor="0" fill="3" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+        <border type="none"/>
+        <children>
+          <component id="83af7" class="javax.swing.JTable" binding="kioskTbl">
+            <constraints/>
+            <properties/>
+          </component>
+        </children>
+      </scrollpane>
+      <component id="ef147" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Product"/>
+        </properties>
+      </component>
+      <component id="4f271" class="javax.swing.JTextField" binding="kioskName">
+        <constraints>
+          <grid row="3" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="df3b1" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Quantity"/>
+        </properties>
+      </component>
+      <component id="293a7" class="javax.swing.JTextField" binding="kioskQty">
+        <constraints>
+          <grid row="3" column="7" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="-1"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="1616f" class="javax.swing.JTextArea" binding="receiptTxt">
+        <constraints>
+          <grid row="2" column="3" row-span="1" col-span="2" vsize-policy="6" hsize-policy="6" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="ba601" class="javax.swing.JButton" binding="addBtn">
+        <constraints>
+          <grid row="4" column="0" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Add to Bill"/>
+        </properties>
+      </component>
+      <component id="ad8d1" class="javax.swing.JButton" binding="clearBtn">
+        <constraints>
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Clear to Bill"/>
+        </properties>
+      </component>
+      <component id="93e73" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Receipt"/>
+        </properties>
+      </component>
+      <component id="ea36d" class="javax.swing.JLabel" binding="logoutLbl">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Logout"/>
+        </properties>
+      </component>
+      <component id="c211c" class="javax.swing.JButton" binding="viewBtn">
+        <constraints>
+          <grid row="1" column="7" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="9" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="View Stock"/>
+        </properties>
+      </component>
+      <component id="10f20" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="400c1" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="0" row-span="1" col-span="2" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="5da8d" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="ac8" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+      <component id="832da" class="javax.swing.JButton" binding="cashBtn">
+        <constraints>
+          <grid row="1" column="5" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cash"/>
+        </properties>
+      </component>
+      <component id="7e6b1" class="javax.swing.JButton" binding="cardBtn">
+        <constraints>
+          <grid row="1" column="6" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Card"/>
+        </properties>
+      </component>
+      <component id="5e1e3" class="javax.swing.JLabel" binding="totalLbl">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value=""/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
