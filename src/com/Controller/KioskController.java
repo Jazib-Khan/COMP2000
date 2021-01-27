@@ -23,7 +23,7 @@ public class KioskController {
             DefaultTableModel model = (DefaultTableModel) kioskTbl.getModel();
 
             Object[] tableLines = br.lines().toArray();
-            //For loop to take in the rows and columns seperate the values with "," and to insert the data entries
+            //For loop to take in the rows and columns separate the values with "," and to insert the data entries
             for (int i =0; i <tableLines.length; i++){
                 String line = tableLines[i].toString().trim();
                 String[] dataRow = line.split(",");
@@ -71,6 +71,7 @@ public class KioskController {
     }
 
     public void displayContents(JTable kioskTbl){
+        //Singleton design pattern: Retrieves the instance of itself
         Kiosk kiosk = Kiosk.getInstance();
         //Grabs the table model and sets the text fields to what's been selected to save the user time when adding to the bill
         DefaultTableModel model = (DefaultTableModel)kioskTbl.getModel();
@@ -80,7 +81,7 @@ public class KioskController {
 
 
     public void clear(){
-        ///Singleton
+        //Singleton design pattern: Retrieves the instance of itself
         Kiosk kiosk = Kiosk.getInstance();
         //Clears the text fields and text area by setting the text empty
         kiosk.total[0] = 0;
@@ -91,7 +92,7 @@ public class KioskController {
     }
 
     public void addData(JTable kioskTbl){
-
+        //Singleton design pattern: Retrieves the instance of itself
         Kiosk kiosk = Kiosk.getInstance();
 
         //Gets the model of the J table

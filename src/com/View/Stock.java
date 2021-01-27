@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 
 
 public class Stock extends JFrame {
-    private static Stock instance; //Singleton
+    private static Stock instance; //Singleton design pattern: Created an object of single object
     private JPanel mainPanel;
     public JTextField barcode;
     public JTextField stockQuantity;
@@ -26,12 +26,13 @@ public class Stock extends JFrame {
     public static void main(String[] args) {
         //Displays the panel
         Stock page = new Stock();
-        //Singleton
+        //Singleton design pattern: Sets up the instance
         instance = page;
         page.setVisible(true);
     }
 
     public static Stock getInstance(){
+        //Singleton
         return Stock.instance;
     }
 

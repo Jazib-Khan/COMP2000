@@ -12,10 +12,6 @@ public class KioskModel {
         model.setColumnIdentifiers(columnIdentifiers);
         kioskTbl.setModel(model);
         kioskTbl.getTableHeader().setReorderingAllowed(false);
-
-
         return model;
-
     }
-
 }

@@ -17,6 +17,7 @@ public class StockController {
     }
 
     public void addData(JTable stockTbl){
+        //Singleton design pattern: Retrieves the instance of itself
         Stock stock = Stock.getInstance();
         //Validation if some of the text fields are left blank then the stock won't be added in
         if (stock.barcode.getText().isEmpty() || stock.stockName.getText().isEmpty() || stock.stockQuantity.getText().isEmpty() || stock.stockPrice.getText().isEmpty()) {
@@ -44,6 +45,7 @@ public class StockController {
     }
 
     public void displayContents(JTable stockTbl){
+        //Singleton design pattern: Retrieves the instance of itself
         Stock stock = Stock.getInstance();
         //Displays the selected row onto the text fields
         DefaultTableModel model = (DefaultTableModel) stockTbl.getModel();
@@ -117,6 +119,7 @@ public class StockController {
     }
 
     public void clear(){
+        //Singleton design pattern: Retrieves the instance of itself
         Stock stock = Stock.getInstance();
         stock.barcode.setText("");
         stock.stockName.setText("");

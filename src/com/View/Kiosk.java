@@ -10,7 +10,7 @@ import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 
 public class Kiosk extends JFrame {
-    private static Kiosk instance; //Singleton
+    private static Kiosk instance; //Singleton design pattern: Created an object of single object
     private JPanel mainPanel;
     private JTable kioskTbl;
     public JTextField kioskName;
@@ -29,7 +29,7 @@ public class Kiosk extends JFrame {
     public static void main(String[] args) {
         //Displays the kiosk gui form
         Kiosk page = new Kiosk();
-        //Singleton
+        //Singleton design pattern: Sets up the instance
         instance = page;
         page.setVisible(true);
     }
