@@ -30,7 +30,10 @@ public class LoginController {
         }
     }
 
-    public void logic(String user, String pass, Object role){
+    public boolean logic(String user, String pass, Object role){
+
+        boolean validuser = false;
+
         try { //Opens the text file of users and checks the count number to read and check specific lines
             RandomAccessFile raf = new RandomAccessFile("resources\\users.txt", "rw");
             for(int i=0;i<ln;i+=4){ System.out.println("count " +i);
@@ -41,10 +44,12 @@ public class LoginController {
                 //Checks if the user input and password input is equal to what's written in the text field
                 //If the role checked is customer then the program is taken into the kiosk page for customers to make purchases
                 if(user.equals(forUser) & pass.equals(forPass) & role.equals("Customer")){
+                    validuser = true;
                     new Kiosk().setVisible(true);
                     break;
                     //If the role checked is customer then the program is taken into the kiosk page for admin to effect product/stock
                 }else if(user.equals(forUser) & pass.equals(forPass) & role.equals("Admin")){
+                    validuser = true;
                     new Stock().setVisible(true);
                     break;
                     //If the username or password input does not equal to what's been entered in the textf ile then an error message is prompted
@@ -60,6 +65,8 @@ public class LoginController {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        return validuser;
     }
 
     //Function to check and read the lines of the text file

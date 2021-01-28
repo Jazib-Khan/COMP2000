@@ -1,9 +1,7 @@
 package com.View;
 
 import com.Controller.KioskController;
-
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -70,7 +68,6 @@ public class Kiosk extends JFrame {
 
                 KioskController kioskController = new KioskController();
                 kioskController.addData(kioskTbl);
-
 
             }
         });

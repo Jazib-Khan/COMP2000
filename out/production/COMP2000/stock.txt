@@ -1,7 +1,7 @@
 425,Coke,300,1
-97678,Cadbury,144,0.50
-1234,Colgate,353,0.85
-45,Toilet Paper,82,1
+97678,Cadburys,144,0.50
+1234,Grapes,353,0.85
+45,Toilet Paper,424,1
 4234,Apples,91,1.20
 891,Water,303,1.50
 432,Oranges,100,1

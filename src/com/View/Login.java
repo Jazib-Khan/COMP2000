@@ -1,6 +1,7 @@
 package com.View;
 
 import com.Controller.LoginController;
+import com.Testing;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,6 +19,10 @@ public class Login extends JFrame {
 
     //Displays the login gui form
     public static void main(String[] args) {
+
+        Testing testing = new Testing();
+        testing.testLogin();
+
         Login page = new Login();
         page.setVisible(true);
     }
