@@ -20,7 +20,7 @@ public class Card extends JFrame{
         //Displays and adjusts the panel
         setContentPane(mainPanel);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setPreferredSize(new Dimension(800, 600));
+        setPreferredSize(new Dimension(330, 300));
         pack();
 
         //Takes the parameter of the total price and sets it to text field for the customer to know the total price

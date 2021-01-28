@@ -1,11 +1,13 @@
-425,Coke,300,1
-97678,Cadburys,144,0.50
-1234,Grapes,353,0.85
-4234,Apples,91,1.20
-432,Oranges,100,1
-45,Toilet Paper,424,1
-891,Water,303,1.50
-523,Noodles,115,1.25
-87,Gum,35,0.60
-43,Crisps,55,0.90
-583,Olives,101,3.20
+425,Coke,299,1
+97678,Cadburys,142,0.50
+1234,Grapes,349,0.85
+4234,Apples,89,1.20
+432,Oranges,98,1
+45,Toilet Paper,414,1
+891,Water,301,1.50
+523,Noodles,195,1.25
+87,Gum,100,0.60
+43,Crisps,53,0.90
+583,Olives,196,3.20
+876,cereal,100,2.20
+583535,books,65,1.20
