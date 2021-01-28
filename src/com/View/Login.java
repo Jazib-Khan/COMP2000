@@ -20,8 +20,11 @@ public class Login extends JFrame {
     //Displays the login gui form
     public static void main(String[] args) {
 
-        Testing testing = new Testing();
-        testing.testLogin();
+        //Testing testing = new Testing();
+        //testing.testLogin();
+
+        //Testing testing = new Testing();
+        //testing.testRegister();
 
         Login page = new Login();
         page.setVisible(true);
