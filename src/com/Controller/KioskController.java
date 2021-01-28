@@ -36,6 +36,7 @@ public class KioskController {
 
     public void checkout(JTable kioskTbl) {
 
+        //fetch values of row and columns of table to loop through them
         int rows = kioskTbl.getRowCount();
         int cols = kioskTbl.getColumnCount();
 

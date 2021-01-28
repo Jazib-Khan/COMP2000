@@ -6,8 +6,6 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-
-
 public class Stock extends JFrame {
     private static Stock instance; //Singleton design pattern: Created an object of single object
     private JPanel mainPanel;
@@ -46,12 +44,11 @@ public class Stock extends JFrame {
         StockController stockController = new StockController();
         stockController.table(stockTbl);
 
-
         stockTbl.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
+                //displays contents of the table to text fields
                 stockController.displayContents(stockTbl);
 
             }
@@ -61,17 +58,18 @@ public class Stock extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                //Adds stock into JTable
                 stockController.addData(stockTbl);
 
             }
         });
 
-        //When clicked will clear everything in the text fields
+
         clearBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
+                //When clicked will clear everything in the text fields
                 stockController.clear();
 
             }
@@ -81,7 +79,7 @@ public class Stock extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
+                //Display the contents of the stock in a JTable
                 stockController.viewStock(stockTbl);
 
             }

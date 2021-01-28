@@ -38,13 +38,13 @@ public class Login extends JFrame {
         setPreferredSize(new Dimension(300,300));
         pack();
 
-        //When the login button is clicked the count lines function is called
-        // as well as the logic function to check user inputs
+
         loginBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
+                //When the login button is clicked the count lines function is called
+                // as well as the logic function to check user inputs
                 LoginController loginController = new LoginController();
                 loginController.countLines();
                 loginController.logic(userID.getText(), passID.getText(), roleCb.getSelectedItem());
@@ -52,13 +52,13 @@ public class Login extends JFrame {
             }
         });
 
-        //When the login button is clicked the count lines function is called
-        // as well as the addData function to add new entries to the text file
+
         registerBtn.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
+                //When the login button is clicked the count lines function is called
+                // as well as the addData function to add new entries to the text file
                 LoginController loginController = new LoginController();
                 loginController.countLines();
                 loginController.addData(userID.getText(), passID.getText(), roleCb.getSelectedItem());

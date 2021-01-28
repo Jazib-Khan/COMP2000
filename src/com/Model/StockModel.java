@@ -18,7 +18,6 @@ public class StockModel {
         stockTbl.setModel(model);
         stockTbl.getTableHeader().setReorderingAllowed(false);
         return model;
-
     }
 
 }

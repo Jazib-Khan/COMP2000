@@ -65,7 +65,7 @@ public class Kiosk extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
+                //Adds inputted product into receipt bill
                 KioskController kioskController = new KioskController();
                 kioskController.addData(kioskTbl);
 
@@ -76,7 +76,7 @@ public class Kiosk extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
-
+                //displays contents of the table to text fields
                 KioskController kioskController = new KioskController();
                 kioskController.displayContents(kioskTbl);
 
@@ -87,6 +87,7 @@ public class Kiosk extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
                 super.mouseClicked(e);
+                //Display the contents of the stock in a JTable
                 KioskController kioskController = new KioskController();
                 kioskController.viewStock(kioskTbl);
             }

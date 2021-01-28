@@ -83,6 +83,7 @@ public class StockController {
             editor.stopCellEditing();
         }
 
+        //fetch values of row and columns of table to loop through them
         int rows = stockTbl.getRowCount();
         int cols = stockTbl.getColumnCount();
 
